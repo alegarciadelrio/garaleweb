@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garale - Two Stroke Performance Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/styles.css" rel="stylesheet">
+    <style>
+        .calculation-fields {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">Garale - Two Stroke Performance Calculator</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form action="/calculate" method="POST" id="calculatorForm">
+                    <div class="form-group mb-4">
+                        <label for="calculation" class="form-label">Select Calculation</label>
+                        <select class="form-select" id="calculation" name="calculation" required>
+                            <option value="">Choose calculation...</option>
+                            <option value="transfer_height">Optimal Transfer Height</option>
+                            <option value="displacement">Surface Time</option>
+                            <option value="carburetor">Optimal Carburetor</option>
+                            <option value="flapper">Optimal Flapper Area</option>
+                            <option value="compression">Compression Ratio</option>
+                            <option value="cylinder_lid">Cylinder Lid Down</option>
+                            <option value="exhaust">Exhaust Dimensions</option>
+                            <option value="yeis">YEIS Volume</option>
+                        </select>
+                    </div>
+
+                    <div id="transfer_height_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="maxRPM" class="form-label">RPM</label>
+                            <input type="number" class="form-control" id="maxRPM" name="maxRPM">
+                        </div>
+                        <div class="form-group">
+                            <label for="stroke" class="form-label">Stroke (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="stroke" name="stroke">
+                        </div>
+                    </div>
+
+                    <div id="displacement_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="height" class="form-label">Height (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="height" name="height">
+                        </div>
+                        <div class="form-group">
+                            <label for="width" class="form-label">Width (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="width" name="width">
+                        </div>
+                        <div class="form-group">
+                            <label for="rpm_displacement" class="form-label">RPM</label>
+                            <input type="number" class="form-control" id="rpm_displacement" name="rpm_displacement">
+                        </div>
+                        <div class="form-group">
+                            <label for="degrees" class="form-label">Degrees</label>
+                            <input type="number" step="0.1" class="form-control" id="degrees" name="degrees">
+                        </div>
+                    </div>
+
+                    <div id="carburetor_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="rpm_carb" class="form-label">RPM</label>
+                            <input type="number" class="form-control" id="rpm_carb" name="rpm_carb">
+                        </div>
+                        <div class="form-group">
+                            <label for="cylinder" class="form-label">Cylinder Volume (cc)</label>
+                            <input type="number" step="0.1" class="form-control" id="cylinder" name="cylinder">
+                        </div>
+                        <div class="form-group">
+                            <label for="airSpeed" class="form-label">Air Speed (m/s)</label>
+                            <input type="number" step="0.1" class="form-control" id="airSpeed" name="airSpeed">
+                        </div>
+                    </div>
+
+                    <div id="flapper_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="carbDiameter" class="form-label">Carburetor Diameter (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="carbDiameter" name="carbDiameter">
+                        </div>
+                    </div>
+
+                    <div id="compression_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="cylinderVolume" class="form-label">Cylinder Volume (cc)</label>
+                            <input type="number" step="0.1" class="form-control" id="cylinderVolume" name="cylinderVolume">
+                        </div>
+                        <div class="form-group">
+                            <label for="chamberVolume" class="form-label">Chamber Volume (cc)</label>
+                            <input type="number" step="0.1" class="form-control" id="chamberVolume" name="chamberVolume">
+                        </div>
+                    </div>
+
+                    <div id="cylinder_lid_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="carrera" class="form-label">Carrera (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="carrera" name="carrera">
+                        </div>
+                        <div class="form-group">
+                            <label for="compresion" class="form-label">Compresion</label>
+                            <input type="number" step="0.1" class="form-control" id="compresion" name="compresion">
+                        </div>
+                        <div class="form-group">
+                            <label for="compresionDeseada" class="form-label">Compresion Deseada</label>
+                            <input type="number" step="0.1" class="form-control" id="compresionDeseada" name="compresionDeseada">
+                        </div>
+                    </div>
+
+                    <div id="exhaust_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="angulo" class="form-label">Angulo 1 (degrees)</label>
+                            <input type="number" step="0.1" class="form-control" id="angulo" name="angulo" value="12">
+                        </div>
+                        <div class="form-group">
+                            <label for="angulo2" class="form-label">Angulo 2 (degrees)</label>
+                            <input type="number" step="0.1" class="form-control" id="angulo2" name="angulo2" value="12">
+                        </div>
+                        <div class="form-group">
+                            <label for="areaEscape" class="form-label">Area de Escape (mm²)</label>
+                            <input type="number" step="0.1" class="form-control" id="areaEscape" name="areaEscape" value="300">
+                        </div>
+                        <div class="form-group">
+                            <label for="rpm_exhaust" class="form-label">RPM</label>
+                            <input type="number" class="form-control" id="rpm_exhaust" name="rpm_exhaust" value="6500">
+                        </div>
+                        <div class="form-group">
+                            <label for="escape" class="form-label">Escape</label>
+                            <input type="number" step="0.1" class="form-control" id="escape" name="escape" value="180">
+                        </div>
+                        <div class="form-group">
+                            <label for="factorBajada" class="form-label">Factor de Bajada</label>
+                            <input type="number" step="0.1" class="form-control" id="factorBajada" name="factorBajada" value="1">
+                        </div>
+                    </div>
+
+                    <div id="yeis_fields" class="calculation-fields">
+                        <div class="form-group">
+                            <label for="largo" class="form-label">Largo (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="largo" name="largo">
+                        </div>
+                        <div class="form-group">
+                            <label for="diametro" class="form-label">Diametro (mm)</label>
+                            <input type="number" step="0.1" class="form-control" id="diametro" name="diametro">
+                        </div>
+                        <div class="form-group">
+                            <label for="rpm_yeis" class="form-label">RPM</label>
+                            <input type="number" class="form-control" id="rpm_yeis" name="rpm_yeis">
+                        </div>
+                        <div class="form-group">
+                            <label for="velSonido" class="form-label">Velocidad del Sonido (m/s)</label>
+                            <input type="number" step="0.1" class="form-control" id="velSonido" name="velSonido" value="343">
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Calculate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculationSelect = document.getElementById('calculation');
+            const allFields = document.querySelectorAll('.calculation-fields');
+            
+            function toggleFields() {
+                console.log('Toggling fields for:', calculationSelect.value);
+                
+                // Hide all fields first
+                allFields.forEach(field => {
+                    field.style.display = 'none';
+                    field.querySelectorAll('input').forEach(input => {
+                        input.required = false;
+                        input.disabled = true;
+                    });
+                });
+                
+                // Show selected fields
+                const selectedValue = calculationSelect.value;
+                if (selectedValue) {
+                    const selectedFields = document.getElementById(selectedValue + '_fields');
+                    if (selectedFields) {
+                        console.log('Showing fields for:', selectedValue);
+                        selectedFields.style.display = 'block';
+                        selectedFields.querySelectorAll('input').forEach(input => {
+                            input.required = true;
+                            input.disabled = false;
+                        });
+                    }
+                }
+            }
+
+            // Initial toggle
+            toggleFields();
+
+            // Add event listener
+            calculationSelect.addEventListener('change', toggleFields);
+        });
+    </script>
+</body>
+</html>

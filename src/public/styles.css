@@ -1,0 +1,33 @@
+body {
+    padding-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.calculation-fields {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+}
+
+.calculation-fields.show {
+    display: block;
+}
+
+.btn-calculate {
+    min-width: 120px;
+    margin-top: 1rem;
+}
+
+select.form-select {
+    margin-bottom: 1rem;
+}
+
+input.form-control {
+    margin-bottom: 0.5rem;
+}
