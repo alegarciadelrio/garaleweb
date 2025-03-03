@@ -1,6 +1,6 @@
 # Garale Web - Two stroke performance calcs
 Software to increment the performance of 2 stroke engines.
-Project started with CiclosArgentinos Forum in 2011. This is Java / Eclipse!
+Project started with CiclosArgentinos Forum in 2011. This is Node.js.
 
 ## Features:
 
